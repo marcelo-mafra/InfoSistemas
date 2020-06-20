@@ -45,6 +45,8 @@ var
   RESTResponse1: TRESTResponse;
   FData: TJSONObject;
 begin
+{Busca dados do cep no serviço remoto. Os dados são retornado pelo serviço no
+padrão JSON.}
   Result := IsValidParam(cep);
   if Result = False then
     Exit;
@@ -81,6 +83,7 @@ end;
 
 procedure TAddressUtils.ClearData;
 begin
+//Limpa as variáveis internas dos dados do endereço.
  FCep := '';
  FLogradouro := '';
  FBairro := '';

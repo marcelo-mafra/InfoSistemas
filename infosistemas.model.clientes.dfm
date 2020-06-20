@@ -130,6 +130,7 @@ object DMClientes: TDMClientes
     object CdsClientesTELEFONE: TStringField
       FieldName = 'TELEFONE'
       Required = True
+      EditMask = '!\(99\)00000-0000;1;_'
     end
     object CdsClientesMAIL: TStringField
       FieldName = 'MAIL'

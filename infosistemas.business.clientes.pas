@@ -33,7 +33,7 @@ function TClientesUtils.ValidateCPF(const CPF: string): boolean;
  dig10, dig11: string;
  s, i, r, peso: integer;
 begin
- //Valida se o aCPF do cliente possui um formato válido.
+ //Valida se o CPF do cliente possui um formato válido.
 // Validação básica inicial: não pode ser números iguais ou ter comprimento
 //diferente do esperado (11).
   Result := not
@@ -49,7 +49,7 @@ begin
 
 // Protege o código para eventuais erros de conversão de tipo na função StrToInt
   try
-{ *-- Cálculo do 1o. Digito Verificador --* }
+{ *-- Cálculo do 1o. Dígito Verificador --* }
     s := 0;
     peso := 10;
 
@@ -65,7 +65,7 @@ begin
     else
       str(r:1, dig10); // converte um número no respectivo caractere numérico
 
-{ *-- Cálculo do 2o. Digito Verificador --* }
+{ *-- Cálculo do 2o. Dígito Verificador --* }
     s := 0;
     peso := 11;
 
@@ -81,7 +81,7 @@ begin
     else
      str(r:1, dig11);
 
-{ Verifica se os digitos calculados conferem com os digitos informados. }
+{ Verifica se os dígitos calculados conferem com os dígitos informados. }
     Result := ((dig10 = CPF[10]) and (dig11 = CPF[11]));
 
   except

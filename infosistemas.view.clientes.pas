@@ -42,6 +42,13 @@ type
     Label7: TLabel;
     ImageList1: TImageList;
     BitBtn1: TBitBtn;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    Label14: TLabel;
     procedure ActLocateClientExecute(Sender: TObject);
     procedure ActLocateClientUpdate(Sender: TObject);
     procedure ActGetCEPDataUpdate(Sender: TObject);

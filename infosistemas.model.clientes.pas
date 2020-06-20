@@ -50,9 +50,13 @@ var
  Mailer: TMailUtils;
  aCustomerData: TStringList;
 begin
+//Somente envia email quando os dados do cliente são inseridos.
  if not FSendMessage then
   Exit;
 
+  //to-do: alterar para trabalhar apenas de forma assíncrona. Esse processo deveria
+  //apenas registrar que um cliente foi inserido. Outro processo, de forma
+  //assíncrona, deveria se encarregar do envio do email.
  Mailer := TMailUtils.Create(TShellFolders.GetCommonAppDataFolder + '\');
  aCustomerData := TStringList.Create;
 
@@ -89,6 +93,7 @@ end;
 
 procedure TDMClientes.CdsClientesBeforePost(DataSet: TDataSet);
 begin
+//Indica que o envio de email será feito apenas para clientes novos.
  FSendMessage := Dataset.State = dsInsert;
 end;
 

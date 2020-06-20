@@ -3,9 +3,10 @@ object FrmMainForm: TFrmMainForm
   Top = 0
   ActiveControl = EdtCPFFind
   BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
   Caption = 'Meus clientes'
-  ClientHeight = 443
-  ClientWidth = 683
+  ClientHeight = 453
+  ClientWidth = 693
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,8 +15,8 @@ object FrmMainForm: TFrmMainForm
   Font.Style = []
   OldCreateOrder = False
   DesignSize = (
-    683
-    443)
+    693
+    453)
   PixelsPerInch = 96
   TextHeight = 13
   object Label7: TLabel
@@ -29,11 +30,12 @@ object FrmMainForm: TFrmMainForm
   object GroupBox1: TGroupBox
     Left = 8
     Top = 51
-    Width = 667
+    Width = 677
     Height = 129
     Anchors = [akLeft, akTop, akRight]
     Caption = 'Dados do Cliente'
-    TabOrder = 0
+    TabOrder = 3
+    ExplicitWidth = 667
     object Label1: TLabel
       Left = 16
       Top = 24
@@ -75,7 +77,7 @@ object FrmMainForm: TFrmMainForm
       Height = 21
       DataField = 'NOME'
       DataSource = DMClientes.DsrClientes
-      TabOrder = 1
+      TabOrder = 2
     end
     object DBEdit3: TDBEdit
       Left = 160
@@ -84,17 +86,17 @@ object FrmMainForm: TFrmMainForm
       Height = 21
       DataField = 'IDENTIDADE'
       DataSource = DMClientes.DsrClientes
-      TabOrder = 2
+      TabOrder = 1
     end
   end
   object GroupBox2: TGroupBox
     Left = 8
-    Top = 186
-    Width = 665
+    Top = 194
+    Width = 675
     Height = 74
     Anchors = [akLeft, akTop, akRight]
     Caption = 'Meios de Contato'
-    TabOrder = 1
+    TabOrder = 4
     object Label4: TLabel
       Left = 16
       Top = 25
@@ -118,6 +120,7 @@ object FrmMainForm: TFrmMainForm
       Height = 21
       DataField = 'TELEFONE'
       DataSource = DMClientes.DsrClientes
+      MaxLength = 14
       TabOrder = 0
     end
     object DBEdit5: TDBEdit
@@ -132,12 +135,12 @@ object FrmMainForm: TFrmMainForm
   end
   object GroupBox3: TGroupBox
     Left = 8
-    Top = 266
-    Width = 667
+    Top = 281
+    Width = 677
     Height = 162
     Anchors = [akLeft, akTop, akRight]
     Caption = 'Endere'#231'o'
-    TabOrder = 2
+    TabOrder = 5
     object Label6: TLabel
       Left = 16
       Top = 25
@@ -206,9 +209,65 @@ object FrmMainForm: TFrmMainForm
         FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
         FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00}
     end
+    object Label8: TLabel
+      Left = 166
+      Top = 25
+      Width = 55
+      Height = 13
+      Caption = '&Logradouro'
+      FocusControl = DBEditLogradouro
+    end
+    object Label9: TLabel
+      Left = 576
+      Top = 25
+      Width = 37
+      Height = 13
+      Caption = 'N&'#250'mero'
+      FocusControl = DBEditLogradouro
+    end
+    object Label10: TLabel
+      Left = 16
+      Top = 74
+      Width = 28
+      Height = 13
+      Caption = '&Bairro'
+      FocusControl = DBEditBairro
+    end
+    object Label11: TLabel
+      Left = 296
+      Top = 74
+      Width = 33
+      Height = 13
+      Caption = '&C&idade'
+      FocusControl = DBEditCidade
+    end
+    object Label12: TLabel
+      Left = 576
+      Top = 74
+      Width = 13
+      Height = 13
+      Caption = '&UF'
+      FocusControl = DBEditCidade
+    end
+    object Label13: TLabel
+      Left = 16
+      Top = 117
+      Width = 19
+      Height = 13
+      Caption = 'P&a'#237's'
+      FocusControl = DBEditPais
+    end
+    object Label14: TLabel
+      Left = 296
+      Top = 117
+      Width = 65
+      Height = 13
+      Caption = 'C&omplemento'
+      FocusControl = DBEditComp
+    end
     object DBEditCEP: TDBEdit
       Left = 16
-      Top = 42
+      Top = 43
       Width = 121
       Height = 21
       DataField = 'CEP'
@@ -236,7 +295,7 @@ object FrmMainForm: TFrmMainForm
       DataField = 'BAIRRO'
       DataSource = DMClientes.DsrClientes
       ReadOnly = True
-      TabOrder = 2
+      TabOrder = 3
     end
     object DBEditCidade: TDBEdit
       Left = 296
@@ -247,41 +306,41 @@ object FrmMainForm: TFrmMainForm
       DataField = 'CIDADE'
       DataSource = DMClientes.DsrClientes
       ReadOnly = True
-      TabOrder = 3
+      TabOrder = 4
     end
     object DBEditUF: TDBEdit
       Left = 576
       Top = 90
-      Width = 79
+      Width = 81
       Height = 21
       Color = clBtnFace
       DataField = 'UF'
       DataSource = DMClientes.DsrClientes
       ReadOnly = True
-      TabOrder = 4
+      TabOrder = 5
     end
     object DBEditPais: TDBEdit
       Left = 16
-      Top = 130
+      Top = 132
       Width = 265
       Height = 21
       DataField = 'PAIS'
       DataSource = DMClientes.DsrClientes
-      TabOrder = 5
+      TabOrder = 6
     end
     object DBEdit10: TDBEdit
       Left = 576
       Top = 42
-      Width = 79
+      Width = 81
       Height = 21
       DataField = 'NUMERO'
       DataSource = DMClientes.DsrClientes
-      TabOrder = 6
+      TabOrder = 2
     end
     object DBEditComp: TDBEdit
       Left = 296
-      Top = 130
-      Width = 351
+      Top = 132
+      Width = 361
       Height = 21
       DataField = 'COMPLEMENTO'
       DataSource = DMClientes.DsrClientes
@@ -289,13 +348,14 @@ object FrmMainForm: TFrmMainForm
     end
   end
   object DBNavigator1: TDBNavigator
-    Left = 429
-    Top = 3
+    Left = 441
+    Top = 14
     Width = 234
     Height = 34
     DataSource = DMClientes.DsrClientes
     VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbInsert, nbDelete, nbPost, nbCancel, nbRefresh]
-    TabOrder = 3
+    TabOrder = 2
+    TabStop = True
   end
   object EdtCPFFind: TMaskEdit
     Left = 8
@@ -304,7 +364,7 @@ object FrmMainForm: TFrmMainForm
     Height = 21
     EditMask = '999.999.999-99;1;_'
     MaxLength = 14
-    TabOrder = 4
+    TabOrder = 0
     Text = '   .   .   -  '
   end
   object BitBtn1: TBitBtn
@@ -314,7 +374,7 @@ object FrmMainForm: TFrmMainForm
     Height = 25
     Action = ActLocateClient
     Caption = 'Localizar!'
-    TabOrder = 5
+    TabOrder = 1
   end
   object ActionList1: TActionList
     Images = ImageList1

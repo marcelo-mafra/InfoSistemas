@@ -2,6 +2,7 @@ object FrmMainForm: TFrmMainForm
   Left = 0
   Top = 0
   ActiveControl = EdtCPFFind
+  BorderIcons = [biSystemMenu, biMinimize]
   Caption = 'Meus clientes'
   ClientHeight = 443
   ClientWidth = 683

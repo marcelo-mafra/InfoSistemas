@@ -107,6 +107,8 @@ object DMClientes: TDMClientes
       end>
     Params = <>
     StoreDefs = True
+    BeforePost = CdsClientesBeforePost
+    AfterPost = CdsClientesAfterPost
     Left = 48
     Top = 40
     object CdsClientesCPF: TStringField

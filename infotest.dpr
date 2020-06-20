@@ -7,7 +7,9 @@ uses
   infosistemas.business.clientes in 'infosistemas.business.clientes.pas',
   infosistemas.business.address in 'infosistemas.business.address.pas',
   infosistemas.business.mail in 'infosistemas.business.mail.pas',
-  infosistemas.view.messages in 'infosistemas.view.messages.pas';
+  infosistemas.view.messages in 'infosistemas.view.messages.pas',
+  infosistemas.model.exceptions in 'infosistemas.model.exceptions.pas',
+  infosistemas.system.winshell in 'infosistemas.system.winshell.pas';
 
 {$R *.res}
 

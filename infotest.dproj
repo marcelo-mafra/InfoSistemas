@@ -113,6 +113,8 @@
         <DCCReference Include="infosistemas.business.address.pas"/>
         <DCCReference Include="infosistemas.business.mail.pas"/>
         <DCCReference Include="infosistemas.view.messages.pas"/>
+        <DCCReference Include="infosistemas.model.exceptions.pas"/>
+        <DCCReference Include="infosistemas.system.winshell.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

@@ -14,6 +14,7 @@ object FrmMainForm: TFrmMainForm
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  ShowHint = True
   DesignSize = (
     693
     453)
@@ -35,7 +36,6 @@ object FrmMainForm: TFrmMainForm
     Anchors = [akLeft, akTop, akRight]
     Caption = 'Dados do Cliente'
     TabOrder = 3
-    ExplicitWidth = 667
     object Label1: TLabel
       Left = 16
       Top = 24
@@ -349,11 +349,24 @@ object FrmMainForm: TFrmMainForm
   end
   object DBNavigator1: TDBNavigator
     Left = 441
-    Top = 14
+    Top = 11
     Width = 234
     Height = 34
     DataSource = DMClientes.DsrClientes
     VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbInsert, nbDelete, nbPost, nbCancel, nbRefresh]
+    Hints.Strings = (
+      'Primeiro'
+      'Anterior'
+      'Pr'#243'ximo'
+      #218'ltimo'
+      'Novo'
+      'Excluir'
+      'Editar'
+      'Salvar'
+      'Cancelar'
+      'Atualizar'
+      'Apply updates'
+      'Cancel updates')
     TabOrder = 2
     TabStop = True
   end
@@ -382,11 +395,13 @@ object FrmMainForm: TFrmMainForm
     Top = 16
     object ActLocateClient: TAction
       Caption = 'Localizar!'
+      Hint = 'Localizar cliente'
       ImageIndex = 0
       OnExecute = ActLocateClientExecute
       OnUpdate = ActLocateClientUpdate
     end
     object ActGetCEPData: TAction
+      Hint = 'Buscar dados  do cep'
       ImageIndex = 1
       OnExecute = ActGetCEPDataExecute
       OnUpdate = ActGetCEPDataUpdate

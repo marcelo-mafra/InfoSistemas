@@ -9,14 +9,26 @@ type
   TClientesUtils = class(TObject)
 
   public
-    class function ValidateCPF(const CPF: string): boolean;
+    constructor Create;
+    destructor Destroy; override;
+    function ValidateCPF(const CPF: string): boolean;
   end;
 
 implementation
 
 { TClientes }
 
-class function TClientesUtils.ValidateCPF(const CPF: string): boolean;
+constructor TClientesUtils.Create;
+begin
+  inherited Create;
+end;
+
+destructor TClientesUtils.Destroy;
+begin
+  inherited Destroy;
+end;
+
+function TClientesUtils.ValidateCPF(const CPF: string): boolean;
  var
  dig10, dig11: string;
  s, i, r, peso: integer;

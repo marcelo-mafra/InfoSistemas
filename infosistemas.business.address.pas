@@ -29,6 +29,7 @@ type
     property Cidade: string read FCidade;
     property UF: string read FUF;
     property Complemento: string read FComplemento;
+
   end;
 
 

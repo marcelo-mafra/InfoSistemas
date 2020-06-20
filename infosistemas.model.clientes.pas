@@ -22,6 +22,7 @@ type
     CdsClientesCIDADE: TStringField;
     CdsClientesUF: TStringField;
     CdsClientesPAIS: TStringField;
+    procedure CdsClientesCPFValidate(Sender: TField);
   private
     { Private declarations }
   public
@@ -35,6 +36,26 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
+uses infosistemas.business.clientes;
+
 {$R *.dfm}
+
+procedure TDMClientes.CdsClientesCPFValidate(Sender: TField);
+var
+ aCliente: TClientesUtils;
+begin
+  aCliente :=  TClientesUtils.Create;
+
+  try
+   if not aCliente.ValidateCPF(Sender.AsString) then
+    begin
+     Sender.FocusControl;
+    end;
+
+  finally
+   if Assigned(aCliente) then
+    FreeAndNil(aCliente);
+  end;
+end;
 
 end.

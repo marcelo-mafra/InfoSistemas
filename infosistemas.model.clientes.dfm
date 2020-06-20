@@ -5,11 +5,11 @@ object DMClientes: TDMClientes
   object CdsClientes: TClientDataSet
     PersistDataPacket.Data = {
       990100009619E0BD01000000180000000D000000000003000000990103435046
-      0100490004000100055749445448020002000B00044E4F4D4501004900040001
+      0100490004000100055749445448020002000E00044E4F4D4501004900040001
       00055749445448020002001E000A4944454E5449444144450100490004000100
       0557494454480200020014000854454C45464F4E450100490004000100055749
       445448020002001400044D41494C010049000400010005574944544802000200
-      1E000343455001004900040001000557494454480200020008000A4C4F475241
+      1E000343455001004900040001000557494454480200020009000A4C4F475241
       444F55524F0100490004000100055749445448020002002800064E554D45524F
       02000100040000000B434F4D504C454D454E544F010049000000010005574944
       5448020002000F000642414952524F0100490004000100055749445448020002
@@ -24,7 +24,7 @@ object DMClientes: TDMClientes
         Name = 'CPF'
         Attributes = [faRequired]
         DataType = ftString
-        Size = 11
+        Size = 14
       end
       item
         Name = 'NOME'
@@ -54,7 +54,7 @@ object DMClientes: TDMClientes
         Name = 'CEP'
         Attributes = [faRequired]
         DataType = ftString
-        Size = 8
+        Size = 9
       end
       item
         Name = 'LOGRADOURO'
@@ -112,7 +112,9 @@ object DMClientes: TDMClientes
     object CdsClientesCPF: TStringField
       FieldName = 'CPF'
       Required = True
-      Size = 11
+      OnValidate = CdsClientesCPFValidate
+      EditMask = '999.999.909-99;1;_'
+      Size = 14
     end
     object CdsClientesNOME: TStringField
       FieldName = 'NOME'
@@ -135,7 +137,8 @@ object DMClientes: TDMClientes
     object CdsClientesCEP: TStringField
       FieldName = 'CEP'
       Required = True
-      Size = 8
+      EditMask = '99999-999;1;_'
+      Size = 9
     end
     object CdsClientesLOGRADOURO: TStringField
       FieldName = 'LOGRADOURO'

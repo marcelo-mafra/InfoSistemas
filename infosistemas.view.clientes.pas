@@ -33,7 +33,7 @@ type
     DBEditCidade: TDBEdit;
     DBEditUF: TDBEdit;
     DBEditPais: TDBEdit;
-    DBEdit10: TDBEdit;
+    DBEditNumero: TDBEdit;
     DBEditComp: TDBEdit;
     ActionList1: TActionList;
     ActLocateClient: TAction;
@@ -79,6 +79,12 @@ begin
       DBEditCidade.Field.AsString :=  aAddress.Cidade;
       DBEditUF.Field.AsString :=  aAddress.UF;
       DBEditComp.Field.AsString :=  aAddress.Complemento;
+      DBEditNumero.SetFocus;
+    end
+   else
+    begin
+      ShowMessage(TMessagesConst.InvalidCEP);
+      DBEditCEP.SetFocus;
     end;
 
  finally

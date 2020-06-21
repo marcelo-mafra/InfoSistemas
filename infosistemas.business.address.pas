@@ -47,6 +47,9 @@ var
 begin
 {Busca dados do cep no serviço remoto. Os dados são retornado pelo serviço no
 padrão JSON.}
+
+  //Verifica o cep informado. Se o cep não está no formato esperado nem vai
+  //ao serviço remoto.
   Result := IsValidParam(cep);
   if Result = False then
     Exit;
@@ -58,21 +61,23 @@ padrão JSON.}
   RESTRequest1.Client := RESTClient1;
   RESTRequest1.Response := RESTResponse1;
   RESTClient1.BaseURL := sUrl + Format(sCepParam, [cep]);
-
   self.ClearData;
-  RESTRequest1.Execute;
-  FData := RESTResponse1.JSONValue as TJSONObject;
 
   try
-    if Assigned(FData) then
-    begin
+    RESTRequest1.Execute;
+    FData := RESTResponse1.JSONValue as TJSONObject;
+
+    //FData.Count = 1 indica que o cep informado não existe no serviço remoto.
+    Result := (Assigned(FData)) and (FData.Count > 1);
+    if Result then
+      begin
         FCep := cep;
         FLogradouro := FData.Values['logradouro'].Value;
         FBairro := FData.Values['bairro'].Value;
         FCidade := FData.Values['localidade'].Value;
         FUF := FData.Values['uf'].Value;
         FComplemento := FData.Values['complemento'].Value;
-    end;
+      end;
 
   finally
     FreeAndNil(RESTClient1);
@@ -105,8 +110,8 @@ end;
 function TAddressUtils.IsValidParam(const cep: string): boolean;
 begin
 //Valida se o cep é válido ou possui comandos inválidos a serem passados para
-//o serviço remoto. Aqui a validação é apenas um constraint de exemplo.
- Result := Trim(cep) <> '';
+//o serviço remoto. Aqui a validação é apenas um constraint simples.
+ Result := (Cep.Trim <> '') and (Cep.Trim.Length = 9) and (Cep.Contains('-'));
 end;
 
 end.

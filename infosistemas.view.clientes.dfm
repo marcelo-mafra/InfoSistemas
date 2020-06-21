@@ -328,7 +328,7 @@ object FrmMainForm: TFrmMainForm
       DataSource = DMClientes.DsrClientes
       TabOrder = 6
     end
-    object DBEdit10: TDBEdit
+    object DBEditNumero: TDBEdit
       Left = 576
       Top = 42
       Width = 81

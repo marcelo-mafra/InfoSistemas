@@ -123,8 +123,6 @@ type
   class function GetShortName(sLongName : string): string;
   class function HasSoundCard:Boolean;
   class function GetFileVersion: String;
-  class function DiskInDrive(const Drive: char): Boolean;
-  class function GetIPAddress: string;
   class function GetComputerName: string;
   class procedure AddToStartDocumentsMenu(sFilePath: string);
   class function DeleteFileWithUndo(sFileName: string): boolean;
@@ -174,7 +172,6 @@ type
   class function OpenCmdLine(const CmdLine: string; WindowState: Word): Boolean;
   class function GetLongIP(IP : string) : string;
   class function GetShortIP(const S: string): string;
-  class procedure ExecuteControlPanel(const AppletPath: string);
   class procedure StartScreenSave(Handle: THandle);
   class function CanHibernate: Boolean;
   class procedure GoToFile(Handle: HWND; FileName: TFileName);
@@ -557,41 +554,6 @@ begin
   CloseServiceHandle(hService);
 end;
 
-class function TWinShell.DiskInDrive(const Drive: char): Boolean;
-var
-  DrvNum: byte;
-  EMode: Word;
-begin
-  result := false;
-  DrvNum := ord(Drive);
-  if DrvNum >= ord('a') then dec(DrvNum,$20);
-  EMode := SetErrorMode(SEM_FAILCRITICALERRORS);
-  try
-    if DiskSize(DrvNum-$40) <> -1 then result := true
-    else messagebeep(0);
-  finally
-    SetErrorMode(EMode);
-  end;
-end;
-
-class function TWinShell.GetIPAddress: string;  //uses winsock
-var
-  phoste:PHostEnt;
-  Buffer: PAnsiChar;
-  WSAData:TWSADATA;
-begin
-  result := '';
-  if WSASTartup($0101, WSAData) <> 0 then exit;
-  GetHostName(Buffer,Sizeof(Buffer));
-  phoste:=GetHostByName(buffer);
-  if phoste = nil then
-   Result := TShellNetworkInfo.LocalHostIP
-  else
-   result:= string(inet_ntoa(PInAddr(phoste^.h_addr_list^)^));
-    //result:=StrPas(inet_ntoa(PInAddr(phoste^.h_addr_list^)^));
-  WSACleanup;
-end;
-
 class function TWinShell.GetComputerName: string;
 var
 I: LongWord;
@@ -965,13 +927,6 @@ begin
   Result := (FileAttr and Attr) = Attr;
 end;
 
-class procedure TWinShell.ExecuteControlPanel(const AppletPath: string);
-var
-Command: string;
-begin
- Command := TShellCommands.Rundll32Cmd + AppletPath;
- WinExec(PAnsiChar(Command), SW_SHOWNORMAL);
-end;
 
 class function TWinShell.ExecuteFile(const FileName, Params, DefaultDir: string;
   ShowCmd: Integer): THandle;

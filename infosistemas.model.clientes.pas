@@ -4,7 +4,8 @@ interface
 
 uses
   System.SysUtils, System.Classes, Data.DB, Datasnap.DBClient,
-  infosistemas.business.mail, infosistemas.system.winshell;
+  infosistemas.business.mail, infosistemas.system.winshell,
+  infosistemas.model.exceptions, infosistemas.view.messages;
 
 type
   TDMClientes = class(TDataModule)
@@ -47,17 +48,18 @@ uses infosistemas.business.clientes;
 
 procedure TDMClientes.CdsClientesAfterPost(DataSet: TDataSet);
 var
- Mailer: TMailUtils;
+ Mailer: TMailSender;
  aCustomerData: TStringList;
+ aAttachmentFile: string;
 begin
-//Somente envia email quando os dados do cliente são inseridos.
+//Somente gera o XML e envia o email quando os dados do cliente são inseridos.
  if not FSendMessage then
   Exit;
 
-  //to-do: alterar para trabalhar apenas de forma assíncrona. Esse processo deveria
-  //apenas registrar que um cliente foi inserido. Outro processo, de forma
-  //assíncrona, deveria se encarregar do envio do email.
- Mailer := TMailUtils.Create(TShellFolders.GetCommonAppDataFolder + '\');
+ //to-do: alterar para trabalhar apenas de forma assíncrona. Esse processo deveria
+ //apenas registrar que um cliente foi inserido. Outro processo, de forma
+ //assíncrona, deveria se encarregar do envio do email.
+ Mailer := TMailSender.Create(TShellFolders.GetCommonAppDataFolder + '\');
  aCustomerData := TStringList.Create;
 
  try
@@ -79,7 +81,12 @@ begin
    else
        aCustomerData.AddPair('Complemento', '');
 
-   Mailer.SendMail(aCustomerData.Text, ACustomerData.Values['Email']);
+   //Cria e salva o anexo XML com os dado do cliente.
+   aAttachmentFile := Mailer.CreateAttachmentFile(ACustomerData.Text);
+
+   //Finalmente, envia o email. Somente envia se o anexo for salvo com sucesso.
+   if not aAttachmentFile.IsEmpty then
+      Mailer.SendMail(aCustomerData.Text, ACustomerData.Values['Email'], aAttachmentFile);
 
  finally
    if Assigned(aCustomerData) then
@@ -92,9 +99,25 @@ begin
 end;
 
 procedure TDMClientes.CdsClientesBeforePost(DataSet: TDataSet);
+var
+ Mailer: TMailSender;
 begin
 //Indica que o envio de email será feito apenas para clientes novos.
  FSendMessage := Dataset.State = dsInsert;
+
+ Mailer := TMailSender.Create('');//Nesse contexto, o parâmetro pode ser uma string vazia.
+
+ try
+   //Valida se o email informado é correto.
+   if not Mailer.IsValidMail(Dataset.FieldByName('MAIL').AsString) then
+    begin
+     FSendMessage := False; //Não enviará mensagem para a caixa inválida.
+     raise EInvalidMailInfo.Create(TMessagesConst.InvalidMail);
+    end;
+
+ finally
+   FreeAndNil(Mailer);
+ end;
 end;
 
 procedure TDMClientes.CdsClientesCPFValidate(Sender: TField);

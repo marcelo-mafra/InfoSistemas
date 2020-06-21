@@ -13,8 +13,12 @@ type
      InvalidHostMail = 'A caixa de destino da mensagem não pode ser vazia!';
      InvalidMailData = 'Os dados do cliente não foram recebido para serem enviados ' +
         'na mensagem de email!';
+     InvalidMail = 'O email informado não é válido!';
+     InvalidCEP = 'O cep informado não é válido e não pode ter seus dados obtidos.';
   end;
 
+
 implementation
+
 
 end.
